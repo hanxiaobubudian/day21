@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // js原生实现bind、call、apply
+    function anyFn(...args) {
+      console.log(this, '***', args);
+    }
+    let obj = {
+      name: '禹丹丹',
+      age: '18',
+    };
+
+    Function.prototype.myCall = function (obj, ...args) {
+      if (obj === null || obj === undefined) {
+        // 指定为 null 和 undefined 的 this 值会自动指向全局对象(浏览器中为window)
+        obj = window
+      } else {
+        // 值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的实例对象
+        obj = Object(obj)
+      }
+      // 函数的this指向隐式绑定到obj上
+      obj.copyFn = this;
+      // 通过隐式绑定执行函数并传递参数
+      let result = obj.copyFn(...args);
+      // 删除上下文对象的属性
+      delete obj.copyFn;
+      // 返回函数执行结果
+      return result;
+    }
+
+    Function.prototype.myBind = function (obj) {
+      // 判断对象是否是个函数
+      if (typeof this !== 'function') {
+        throw new TypeError('Error');
+      }
+
+      // 获取参数
+      const args = [...arguments].slice(1);
+      
+      const fn = this;
+      return function Fn() {
+        // 根据调用不同方式，传人不同绑定值
+        return fn.apply(this instanceof Fn ? new fn(...arguments) : obj, [...args, ...arguments])
+      }
+    }
+    Function.prototype.myBind = function (obj, ...args) {
+      // 判断对象是否是个函数
+      if (obj === null || obj === undefined) {
+        // 指定为 null 和 undefined 的 this 值会自动指向全局对象(浏览器中为window)
+        obj = window
+      } else {
+        // 值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的实例对象
+        obj = Object(obj)
+      }
+
+      const fn = this;
+      return function (...rest) {
+        console.log('args==', args, 'rest===', rest)
+        fn.call(obj, ...args, ...rest);
+      }
+    }
+    Function.prototype.myApply = Function.prototype.myCall;
+    // anyFn.bind(obj)(1,2);
+    anyFn.myBind(obj, 1, 2)(3);
+    // anyFn.call(obj, 1)
+    // anyFn.myCall(obj, 1, 2)
+    // anyFn.apply(obj, [1]);
+    // anyFn.myApply(obj, 6, 8);
+  </script>
+</body>
+
+</html>
