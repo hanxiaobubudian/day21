@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>继承</title>
+</head>
+<body>
+  <script>
+    // 原型链实现继承
+    // 创建一个人的构造函数
+    function Person(self) {
+      // 给人添加吃饭的方法
+      this.eat = function() {
+        console.log('是个人都会吃饭');
+      };
+      // 给人添加说话的方法
+      this.say = function() {
+        console.log('是个人都会说话');
+      }
+      // 给人添加五官属性
+      this.wuguan = {
+        eye: '2只眼睛',
+        mouth: '1个嘴巴',
+        ear: '2个耳朵',
+      }; 
+      // 给人添加个人属性
+      this.self = self;
+    }
+    // 创建一个男人的构造函数
+    function Man(slef) {
+      // 男人的特性
+      this.self = slef;
+      // 男人只会打游戏
+      this.playGame = function() {
+        console.log(`${this.self.name}的人只会打游戏，他的腿毛${this.self.tuimao}`)
+      }
+    }
+     // 创建一个女人的构造函数
+     function Woman(slef) {
+      // 女人的特性
+      this.self = slef;
+      this.age = 18;
+      // 女人只会花钱
+      this.buy = function() {
+        console.log(`${this.self.name}的人只会买买买`);
+      }
+    }
+
+    // 女人实现继承
+    Woman.prototype = new Person();
+
+    // 创建一个名字叫做xiaoxiao的女人
+    const xiaoxiao = new Woman({
+      name: 'xiaoxiao',
+    });
+    console.log(xiaoxiao.wuguan); // 可以看到xiaoxiao这个人有了五官
+    
+
+    // 创建一个名字叫做bob的男人
+    const bob = new Man({
+      name: 'bob',
+      tuimao: '又长又黑',
+    });
+    console.log(bob.wuguan); // undefined, 这是一个无脸男，它没有继承Person的五官
+
+  </script>
+</body>
+</html>

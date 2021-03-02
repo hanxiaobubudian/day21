@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function anyFn(...args) {
+      console.log(this, '*****', ...args);
+    }
+    Function.prototype.myCall = function(obj, ...args) {
+      obj = Object(obj) || window;
+      obj.copyFn = this;
+      let result = obj.copyFn(...args);
+      delete obj.copyFn;
+      return result;
+    }
+    Function.prototype.myBind = function(obj, ...args) {
+      obj = Object(obj) || window;
+      copyFn = this;
+      return function(...rest) {
+        copyFn.call(obj, ...args, ...rest);
+      }
+    }
+    const obj = {
+      test: 1,
+    }
+    anyFn.myCall(obj, 1);
+    anyFn.myBind(obj, 1);
+  </script>
+</body>
+</html>
