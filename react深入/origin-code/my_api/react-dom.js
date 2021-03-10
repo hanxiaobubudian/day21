@@ -30,6 +30,7 @@ function createNode(vnode) {
     let node; //真实node
     // 根据组件类型的不同创建不同节点
     const { type } = vnode;
+    // console.log('type---', type)
     if (typeof type === "string") {
         // 标签
         node = updateHostComponent(vnode);
@@ -48,9 +49,9 @@ function updateHostComponent(vnode) {
     const { type, props } = vnode;
     const node = document.createElement(type);
     // 处理内部节点
-    if (props.children)  {
-        reconcileChild(node, props.children)
-    };
+    if (props.children) {
+        reconcileChild(node, props.children);
+    }
     // 添加属性
     addProps(props, node);
     return node;
@@ -62,7 +63,7 @@ function updateTextComponent(vnode) {
 }
 // 函数组件
 function updateFuncComponent(vnode) {
-    console.log("vnode===", vnode);
+    // console.log("vnode===", vnode);
     const { type, props } = vnode;
     vnode = type(props);
     const node = createNode(vnode);
@@ -80,7 +81,6 @@ function updateClassComponent(vnode) {
 //  节点内部子节点
 function reconcileChild(node, children) {
     const newChildren = Array.isArray(children) ? children : [children];
-    console.log(newChildren)
     newChildren &&
         newChildren.map((item, index) => {
             node.appendChild(createNode(item));
