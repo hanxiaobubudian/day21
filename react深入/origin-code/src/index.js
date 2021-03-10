@@ -1,4 +1,4 @@
-import ReactDOM from '../my_api/react-dom';
+// import ReactDOM from '../my_api/react-dom';
 // import './index.css';
 // import App from './App';
 // import reportWebVitals from './reportWebVitals';
