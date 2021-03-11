@@ -35,8 +35,7 @@
     "lint-staged": {
         "*.{js, jsx,ts,tsx,vue,html, md}": [
             "prettier --write",
-            "eslint",
-            "git add"
+        "git add"
         ],
         "run/*": [
             "git rm --cached"
