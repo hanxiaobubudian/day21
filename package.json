@@ -5,19 +5,19 @@
     "main": "index.js",
     "dependencies": {},
     "devDependencies": {
-        "babel-eslint": "^10.1.0",
-        "eslint": "^7.21.0",
-        "eslint-config-egg": "^9.0.0",
-        "husky": "^5.1.3",
-        "lint-staged": "^10.5.4",
-        "prettier": "^1.16.4",
-        "eslint-plugin-prettier": "^3.0.1",
-        "eslint-config-prettier": "^4.0.0"
-
+        "eslint": "^5.0.0",
+        "eslint-config-ali": "^2.0.1",
+        "eslint-plugin-import": "^2.6.0",
+        "eslint-plugin-react": "^7.1.0",
+        "husky": "^0.14.2",
+        "babel-eslint": "^8.1.1",
+        "lint-staged": "^4.0.0",
+        "prettier":"^1.16.4",
+        "eslint-plugin-prettier":"^3.0.1",
+        "eslint-config-prettier":"^4.0.0"
     },
     "scripts": {
-        "lint": "eslint .  --ext .js",
-        "prettier": "prettier --trailing-comma es5 --single-quote --semi --write '**/*.{js,json,md}'"
+        "precommit": "lint-staged"
     },
     "repository": {
         "type": "git",
@@ -37,12 +37,9 @@
     },
     "lint-staged": {
         "*.{js, jsx,ts,tsx,vue,html, md}": [
-            "prettier --trailing-comma es5 --single-quote --semi --write",
-            "eslint",
+            "prettier  --write",
+            "eslint --fix --ext .js",
             "git add"
-        ],
-        "run/*": [
-            "git rm --cached"
         ]
     }
 }
