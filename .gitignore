@@ -1,10 +1,11 @@
 .history
 *node_modules
 *mochawesome-report
+
 # dependencies
 /.pnp
 .pnp.js
-
+/.vscode
 # testing
 /coverage
 

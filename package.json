@@ -1,0 +1,36 @@
+{
+  "name": "day21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^5.1.3",
+    "lint-staged": "^10.5.4"
+  },
+  "scripts": {
+    "lint-staged": "lint-staged",
+    "eslint:fix": "npx eslint --fix --ext \".js,.jsx,.ts,.vue,.html,.md\"",
+    "eslint:lint": "npx eslint --ext \".js,.jsx,.ts,.vue,.html,.md\"",
+    "stylelint:fix": "npx stylelint \"**/*.css,.less,.scss\" --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanxiaobubudian/day21.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanxiaobubudian/day21/issues"
+  },
+  "homepage": "https://github.com/hanxiaobubudian/day21#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"  
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,vue,html,md}": "npm run eslint:fix",
+    "*.{css,less,scss}": "npm run stylelint:fix"
+  }
+}
