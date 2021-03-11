@@ -18,8 +18,6 @@ class Vdom {
         } else {
             el.innerText = this.children;
         }
-        console.log('测试pre-commit')
-        console.log('测试pre-commit')
         return el
     }
 }
