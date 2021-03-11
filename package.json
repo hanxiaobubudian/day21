@@ -16,7 +16,8 @@
 
     },
     "scripts": {
-        "precommit": "lint-staged"
+        "lint": "eslint .  --ext .js",
+        "prettier": "prettier --trailing-comma es5 --single-quote --semi --write '**/*.{js,json,md}'"
     },
     "repository": {
         "type": "git",
@@ -31,13 +32,13 @@
     "?husky": "git提交钩子",
     "husky": {
         "hooks": {
-            "pre-commit": "npm run lint-staged"
+            "pre-commit": "lint-staged"
         }
     },
     "lint-staged": {
         "*.{js, jsx,ts,tsx,vue,html, md}": [
-            "eslint --fix",
-            "prettier --write",
+            "prettier --trailing-comma es5 --single-quote --semi --write",
+            "eslint",
             "git add"
         ],
         "run/*": [
