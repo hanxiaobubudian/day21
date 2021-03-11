@@ -1,4 +1,5 @@
-import ReactDOM from "../my_api/react-dom";
+import ReactDOM from "../my_api/react-dom-v3";
+// import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 // import reportWebVitals from './reportWebVitals';
@@ -9,14 +10,16 @@ const jsx = (
         <a title="lalal" href="https://www.baidu.com/">
             qqqq
         </a>
+        <p>这一</p>
+        <FuncComponet name="llll" />
     </div>
 );
 // console.log('myReactDOM', ReactDOM);
 ReactDOM.render(
     // <React.StrictMode>
-    <App />
+    // <App />
     // </React.StrictMode>,
-    // jsx,
+    jsx
     // <FuncComponet name="llll" />
     ,document.getElementById("root")
 );
