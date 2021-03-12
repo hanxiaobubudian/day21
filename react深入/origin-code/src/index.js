@@ -1,21 +1,21 @@
-import ReactDOM from "../my_api/react-dom-v3";
+// import ReactDOM from "../my_api/react-dom-v3";
 // import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import {render} from '../my_api_2'
+// import "./index.css";
+// import App from "./App";
 // import reportWebVitals from './reportWebVitals';
 
-const jsx = (
+const jsx = 
     <div class="box">
         <h1>钱钱钱</h1>
         <a title="lalal" href="https://www.baidu.com/">
             qqqq
         </a>
         <p>这一</p>
-        <FuncComponet name="llll" />
+        {/* <FuncComponet name="llll" /> */}
     </div>
-);
 // console.log('myReactDOM', ReactDOM);
-ReactDOM.render(
+render(
     // <React.StrictMode>
     // <App />
     // </React.StrictMode>,
