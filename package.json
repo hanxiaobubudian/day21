@@ -2,7 +2,7 @@
     "name": "day21",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "index_2.js",
     "dependencies": {},
     "devDependencies": {
         "eslint": "^5.0.0",

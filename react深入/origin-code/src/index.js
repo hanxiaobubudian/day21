@@ -1,6 +1,5 @@
-// import ReactDOM from "../my_api/react-dom-v3";
+import ReactDOM from "../my_api/react-dom-v3";
 // import ReactDOM from "react-dom";
-import {render} from '../my_api_2'
 // import "./index.css";
 // import App from "./App";
 // import reportWebVitals from './reportWebVitals';
@@ -15,7 +14,7 @@ const jsx =
         {/* <FuncComponet name="llll" /> */}
     </div>
 // console.log('myReactDOM', ReactDOM);
-render(
+ReactDOM.render(
     // <React.StrictMode>
     // <App />
     // </React.StrictMode>,
