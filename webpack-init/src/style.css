@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'myfont';
+    src: url('./my-font.woff?t=1565593098638') format('woff');
+    font-weight: 1000;
+    color: orchid;
+}
+.hello {
+    /* color: red; */
+    background: url('./icon.jpeg') no-repeat;
+    font-family: 'myfont !important';
+}

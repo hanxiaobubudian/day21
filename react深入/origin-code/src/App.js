@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 // function App() {
 //   return (
@@ -72,14 +72,18 @@ import React, {useState} from "react";
 
 // hooks
 function App(props) {
-	const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
-	return (
-		<div>
-			<p>click{count}次</p>
-			{/* <button onClick={() => setCount(count + 1)}>click</button> */}
-		</div>
-	)
+  return (
+    <div>
+      <p>click{count}次</p>
+      {/* <button onClick={() => setCount(count + 1)}>click</button> */}
+    </div>
+  );
+}
+
+function add(a, b) {
+  return a + b;
 }
 
 export default App;

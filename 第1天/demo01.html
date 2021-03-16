@@ -1,242 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      position: relative;
-    }
-
-    #father {
-      width: 200px;
-      height: 200px;
-      background: #eee;
-      /* 
+      #father {
+        width: 200px;
+        height: 200px;
+        background: #eee;
+        /* 
         处理margin折叠问题：
         1、对父元素设置border
         2、对父元素设置padding
         3、对父元素设置overflow: hidden
         4、使用其他方式布局
        */
-      /* border: 1px solid transparent; */
-      /* padding-top: 30px; */
-      overflow: hidden;
-    }
+        /* border: 1px solid transparent; */
+        /* padding-top: 30px; */
+        overflow: hidden;
+      }
 
-    .child {
-      width: 100px;
-      height: 100px;
-      margin: 30px auto;
-      background: palegreen;
-    }
-  </style>
-</head>
+      .child {
+        width: 100px;
+        height: 100px;
+        margin: 30px auto;
+        background: palegreen;
+      }
+    </style>
+  </head>
 
-<body>
-  <div id="father">
-    <div class="child"></div>
-  </div>
-</body>
-<script>
-  (
-    function () {
-      document.getElementById('father').onclick = function (event) {
+  <body>
+    <div id="father">
+      <div class="child"></div>
+    </div>
+  </body>
+  <script>
+    (function() {
+      document.getElementById("father").onclick = function(event) {
         event = event || window.event;
         let target = event.target || event.srcElement;
-        console.log('event===', event);
-        console.log('target===', target);
-        console.log('target.nodeName===', target.nodeName.toLowerCase());
-      }
-    }
-  )()
+        console.log("event===", event);
+        console.log("target===", target);
+        console.log("target.nodeName===", target.nodeName.toLowerCase());
+      };
+    })();
 
-  // 扁平化
-  function flatten(arr) {
-    let result = [];
-    for (let i = 0, len = arr.length; i < len; i++) {
-      if (Array.isArray(arr[i])) {
-        // result = result.concat(flatten(arr[i]));
-        result = [...result, ...flatten(arr[i])]
-      } else {
-        result.push(arr[i]);
+    // 扁平化
+    function flatten(arr) {
+      let result = [];
+      for (let i = 0, len = arr.length; i < len; i++) {
+        if (Array.isArray(arr[i])) {
+          // result = result.concat(flatten(arr[i]));
+          result = [...result, ...flatten(arr[i])];
+        } else {
+          result.push(arr[i]);
+        }
       }
+      return result;
     }
-    return result;
-  }
-  let a1 = [1, 2, 3, [4, 5, [6]]];
-  console.log('扁平化===', flatten(a1)) // [1, 2, 3, 4, 5]
+    let a1 = [1, 2, 3, [4, 5, [6]]];
+    console.log("扁平化===", flatten(a1)); // [1, 2, 3, 4, 5]
 
-  //  去重
-  function unique(arr) {
-    // let append = new Set();
-    // return arr.filter(item => {
-    //   let id = item + JSON.stringify(item);
-    //   if(append.has(id)) {
-    //     return false;
-    //   } else {
-    //     append.add(id);
-    //     return true;
+    //  去重
+    function unique(arr) {
+      // let append = new Set();
+      // return arr.filter(item => {
+      //   let id = item + JSON.stringify(item);
+      //   if(append.has(id)) {
+      //     return false;
+      //   } else {
+      //     append.add(id);
+      //     return true;
+      //   }
+      // })
+      return Array.from(new Set(arr));
+    }
+    a1 = [1, 2, [3, 4, 5], 3, 4, [6]];
+    console.log("去重===", unique(a1));
+    a1 = [1, 2, 3, 4, 5, 4, 5, 6, 8, 8];
+    console.log("去重===", unique(a1));
+    a1 = [
+      {
+        a: 1,
+        b: 2
+      },
+      {
+        a: 1,
+        b: 2
+      },
+      {
+        a: 1,
+        b: 3
+      },
+      {
+        a: 1,
+        b: 2
+      },
+      {
+        a: 1,
+        b: 2
+      }
+    ];
+    console.log("去重===", unique(a1));
+
+    function copy(obj) {
+      let result = Array.isArray(obj) ? [] : {};
+      Object.keys(obj).forEach(key => (result[key] = obj[key]));
+      return result;
+    }
+    // let obj = {
+    //   a: 1,
+    //   b: 2,
+    //   iObj: {
+    //     ia: 1,
+    //     ib: 2,
     //   }
-    // })
-    return Array.from(new Set(arr))
-  }
-  a1 = [1, 2, [3, 4, 5], 3, 4, [6]];
-  console.log('去重===', unique(a1));
-  a1 = [1, 2, 3, 4, 5, 4, 5, 6, 8, 8];
-  console.log('去重===', unique(a1));
-  a1 = [{
-      a: 1,
-      b: 2
-    },
-    {
-      a: 1,
-      b: 2
-    },
-    {
-      a: 1,
-      b: 3
-    },
-    {
-      a: 1,
-      b: 2
-    },
-    {
-      a: 1,
-      b: 2
-    },
-  ];
-  console.log('去重===', unique(a1));
+    // };
+    // const copyObj = copy(obj);
+    // console.log(copyObj);
+    // copyObj.c = 'c';
+    // console.log(copyObj, '***', obj);
+    // const otherObj = {...obj};
+    // otherObj.c = 'c';
+    // console.log(otherObj, '****', obj)
 
-  function copy(obj) {
-    let result = Array.isArray(obj) ? [] : {}
-    Object.keys(obj).forEach(key => result[key] = obj[key])
-    return result
-  }
-  // let obj = {
-  //   a: 1, 
-  //   b: 2,
-  //   iObj: {
-  //     ia: 1,
-  //     ib: 2,
-  //   }
-  // };
-  // const copyObj = copy(obj);
-  // console.log(copyObj);
-  // copyObj.c = 'c';
-  // console.log(copyObj, '***', obj);
-  // const otherObj = {...obj};
-  // otherObj.c = 'c';
-  // console.log(otherObj, '****', obj)
+    var obj1 = {
+      name: "zhangsan",
+      age: "18",
+      n: NaN,
+      language: [1, [2, 3], [4, 5, undefined]]
+    };
+    var obj2 = obj1; //赋值得到的对象
+    obj2.name = "lisi"; //影响obj1
+    obj2.language[1] = ["er", "san"];
+    console.log("obj1", obj1, "obj2", obj2);
 
-  var obj1 = {
-    'name': 'zhangsan',
-    'age': '18',
-    'n': NaN,
-    'language': [1, [2, 3],
-      [4, 5, undefined]
-    ],
-  };
-  var obj2 = obj1; //赋值得到的对象
-  obj2.name = "lisi"; //影响obj1
-  obj2.language[1] = ['er', 'san'];
-  console.log('obj1', obj1, 'obj2', obj2);
+    var obj3 = {
+      ...obj1
+    }; // 浅拷贝-只复制一层对象的属性
+    obj3.name = "obj3";
+    obj3.language[1] = ["2", "3"];
+    console.log("obj1", obj1, "obj3", obj3);
 
-  var obj3 = {
-    ...obj1
-  }; // 浅拷贝-只复制一层对象的属性
-  obj3.name = 'obj3';
-  obj3.language[1] = ['2', '3'];
-  console.log('obj1', obj1, 'obj3', obj3);
+    obj4 = deepClone(obj1);
+    obj4.language[1] = ["22", "32"];
+    console.log("obj1", obj1, "obj4", obj4);
 
+    // obj5 = JSON.parse(JSON.stringify(obj1));
+    // obj5.language[1] = ['2', '2'];
+    obj5 = JSON.parse(JSON.stringify([1, 2, 3, [4, 5, [6, 7]]]));
+    obj5[3][2][0] = 1;
+    console.log("obj1", obj1, "obj5", obj5);
 
-  obj4 = deepClone(obj1);
-  obj4.language[1] = ['22', '32'];
-  console.log('obj1', obj1, 'obj4', obj4);
+    // 深copy处理了循环引用和key为symbol类型的情况
+    function deepClone(obj) {
+      if (obj === null) return null;
+      if (typeof obj !== "object") return obj;
+      if (obj.constructor === Date) return new Date(obj);
+      if (obj.constructor === RegExp) return new RegExp(obj);
+      var newObj = new obj.constructor(); //保持继承链
 
-  // obj5 = JSON.parse(JSON.stringify(obj1));
-  // obj5.language[1] = ['2', '2'];
-  obj5 = JSON.parse(JSON.stringify([1, 2, 3, [4, 5, [6, 7]]]));
-  obj5[3][2][0] = 1;
-  console.log('obj1', obj1, 'obj5', obj5);
-
-
-  // 深copy处理了循环引用和key为symbol类型的情况
-  function deepClone(obj) {
-    if (obj === null) return null
-    if (typeof obj !== 'object') return obj;
-    if (obj.constructor === Date) return new Date(obj);
-    if (obj.constructor === RegExp) return new RegExp(obj);
-    var newObj = new obj.constructor(); //保持继承链
-
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) { //不遍历其原型链上的属性
-        var val = obj[key];
-        // 使用arguments.callee解除与函数名的耦合
-        newObj[key] = typeof val === 'object' ? arguments.callee(val) : val;
-      }
-    }
-    return newObj;
-  }
-
-  // function deepClone(obj, appeard = new Map()) {
-  //   if (!(obj instanceof Object)) return obj //如果是原始数据类型
-  //   if (appeard.has(obj)) return appeard.get(obj) //如果已经出现过
-
-  //   let result = Array.isArray(obj) ? [] : {}
-  //   appeard.set(obj, result) //将新对象放入map
-
-  //   //遍历所有属性进行递归拷贝
-  //   ;
-  //   [...Object.keys(obj), ...Object.getOwnPropertySymbols(obj)]
-  //   .forEach(key => result[key] = copy(obj[key], appeard))
-
-  //   return result
-  // }
-
-  // 定义一个深拷贝函数  接收目标target参数
-  function deepClone(target) {
-    // 定义一个变量
-    let result;
-    // 如果当前需要深拷贝的是一个对象的话
-    if (typeof target === 'object') {
-      // 如果是一个数组的话
-      if (Array.isArray(target)) {
-        result = []; // 将result赋值为一个数组，并且执行遍历
-        for (let i in target) {
-          // 递归克隆数组中的每一项
-          result.push(deepClone(target[i]))
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          //不遍历其原型链上的属性
+          var val = obj[key];
+          // 使用arguments.callee解除与函数名的耦合
+          newObj[key] = typeof val === "object" ? arguments.callee(val) : val;
         }
-        // 判断如果当前的值是null的话；直接赋值为null
-      } else if (target === null) {
-        result = null;
-        // 判断如果当前的值是一个RegExp对象的话，直接赋值    
-      } else if (target.constructor === RegExp) {
-        result = target;
+      }
+      return newObj;
+    }
+
+    // function deepClone(obj, appeard = new Map()) {
+    //   if (!(obj instanceof Object)) return obj //如果是原始数据类型
+    //   if (appeard.has(obj)) return appeard.get(obj) //如果已经出现过
+
+    //   let result = Array.isArray(obj) ? [] : {}
+    //   appeard.set(obj, result) //将新对象放入map
+
+    //   //遍历所有属性进行递归拷贝
+    //   ;
+    //   [...Object.keys(obj), ...Object.getOwnPropertySymbols(obj)]
+    //   .forEach(key => result[key] = copy(obj[key], appeard))
+
+    //   return result
+    // }
+
+    // 定义一个深拷贝函数  接收目标target参数
+    function deepClone(target) {
+      // 定义一个变量
+      let result;
+      // 如果当前需要深拷贝的是一个对象的话
+      if (typeof target === "object") {
+        // 如果是一个数组的话
+        if (Array.isArray(target)) {
+          result = []; // 将result赋值为一个数组，并且执行遍历
+          for (let i in target) {
+            // 递归克隆数组中的每一项
+            result.push(deepClone(target[i]));
+          }
+          // 判断如果当前的值是null的话；直接赋值为null
+        } else if (target === null) {
+          result = null;
+          // 判断如果当前的值是一个RegExp对象的话，直接赋值
+        } else if (target.constructor === RegExp) {
+          result = target;
+        } else {
+          // 否则是普通对象，直接for in循环，递归赋值对象的所有值
+          result = {};
+          for (let i in target) {
+            result[i] = deepClone(target[i]);
+          }
+        }
+        // 如果不是对象的话，就是基本数据类型，那么直接赋值
       } else {
-        // 否则是普通对象，直接for in循环，递归赋值对象的所有值
-        result = {};
-        for (let i in target) {
-          result[i] = deepClone(target[i]);
-        }
+        result = target;
       }
-      // 如果不是对象的话，就是基本数据类型，那么直接赋值
-    } else {
-      result = target;
+      // 返回最终结果
+      return result;
     }
-    // 返回最终结果
-    return result;
-  }
 
-  // 去除空格
-  function trim(str) {
-    return str.replace(/(^\s+)|(\s+$)/g, '');
-  }
-</script>
-
+    // 去除空格
+    function trim(str) {
+      return str.replace(/(^\s+)|(\s+$)/g, "");
+    }
+  </script>
 </html>

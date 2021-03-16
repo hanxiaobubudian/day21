@@ -1,6 +1,7 @@
 .history
 *node_modules
 *mochawesome-report
+*dist
 
 # dependencies
 /.pnp
