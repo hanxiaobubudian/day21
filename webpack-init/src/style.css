@@ -5,7 +5,7 @@
     color: orchid;
 }
 .hello {
-    /* color: red; */
-    background: url('./icon.jpeg') no-repeat;
+    color: red;
+    /* background: url('./icon.jpeg') no-repeat; */
     font-family: 'myfont !important';
 }
