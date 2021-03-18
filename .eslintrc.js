@@ -2,7 +2,7 @@ module.exports = {
   extends: ["eslint-config-ali", "prettier", "plugin:prettier/recommended"],
   parser: "babel-eslint",
   rules: {
-    "prettier/prettier": "error",
+    "prettier/prettier": true,
     strict: "off",
     "no-console": "off",
     "import/no-dynamic-require": "off",
