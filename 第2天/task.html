@@ -1,29 +1,61 @@
+<!--
+ * @Description: 
+ * @Author: yudandan
+ * @Date: 2021-03-05 09:30:09
+ * @LastEditors: yudandan
+ * @LastEditTime: 2021-03-18 15:02:55
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ajax</title>
-</head>
-<body>
-  <script>
-    // 创建xmlHttpRequest对象
-    var request = new XMLHttpRequest();
-    // 设置请求
-    request.open('get', 'url', true);
-    // 发送请求
-    request.send();
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ajax</title>
+    </head>
+    <body>
+        <script>
+            // 创建xmlHttpRequest对象
+            // var request = new XMLHttpRequest();
+            // // 设置请求
+            // request.open('get', 'url', true);
+            // // 发送请求
+            // request.send();
 
-    request.onreadystatechange = function() {
-      // 判断响应
-      if(request.readyState === 4) {
-        // 成功响应逻辑
-      } else {
-        request.close()
-      }
-    }
+            // request.onreadystatechange = function() {
+            //     // 判断响应
+            //     if (request.readyState === 4) {
+            //         // 成功响应逻辑
+            //     } else {
+            //         request.close();
+            //     }
+            // };
 
-  </script>
-</body>
+            /**
+             * promise是一个函数返回的对象，可以在上面绑定回调函数
+             * **/
+            // 成功的回调
+            function successCallback(result) {
+                console.log('创建成功', result);
+            }
+            // 失败回调
+            function failCallback(error) {
+                console.log('失败', error);
+            }
+
+            function createFileAsync(set, success, fail) {
+
+            }
+            // createFileAsync({}, successCallback, failCallback);
+            const promise = new Promise(createFileAsync);
+            promise.then(successCallback, failCallback);
+
+            function anyFn(callback) {
+                if(callback) callback()
+            }
+            anyFn(successCallback(11111))
+            
+
+        </script>
+    </body>
 </html>
