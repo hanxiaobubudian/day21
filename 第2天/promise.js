@@ -3,7 +3,7 @@
  * @Author: yudandan
  * @Date: 2021-03-18 15:31:11
  * @LastEditors: yudandan
- * @LastEditTime: 2021-03-18 17:18:25
+ * @LastEditTime: 2021-03-19 11:42:06
  */
 
 const { reject } = require('lodash');
@@ -123,33 +123,126 @@ Promise.prototype.myFinally = function(callback) {
  * Promise.race()
  */
 
-// 手动实现Promise.allSettled
-function myAllSettled(list) {
-    const len = list.length;
-    let resArr = new Array(len);
-    return new Promise((resolve, reject) => {
-        list.forEach((item, index) => {
-            item.then(
-                (res) => {
-                    resArr[index] = {
-                        'status': 'fulfilled',
-                        'value': res,
-                    };
-                    // 所有的都执行完毕
-                    if (index === len - 1) {
-                        resolve(resArr);
-                    }
-                },
-                (error) => {
-                    resArr[index] = {
-                        'status': 'rejected',
-                        'error': error,
-                    };
-                    if (index === len - 1) {
-                        resolve(resArr);
-                    }
-                }
-            );
-        });
-    });
+// // 手动实现Promise.allSettled
+// function myAllSettled(list) {
+//     const len = list.length;
+//     let resArr = new Array(len);
+//     return new Promise((resolve, reject) => {
+//         list.forEach((item, index) => {
+//             item.then(
+//                 (res) => {
+//                     resArr[index] = {
+//                         'status': 'fulfilled',
+//                         'value': res,
+//                     };
+//                     // 所有的都执行完毕
+//                     if (index === len - 1) {
+//                         resolve(resArr);
+//                     }
+//                 },
+//                 (error) => {
+//                     resArr[index] = {
+//                         'status': 'rejected',
+//                         'error': error,
+//                     };
+//                     if (index === len - 1) {
+//                         resolve(resArr);
+//                     }
+//                 }
+//             );
+//         });
+//     });
+// }
+
+//  手动实现promise
+// 原理：使用回调函数，把回调函数封装在内部，使用上一直通过then方法链式调用。
+// 极简的实现
+// class MyPromise {
+//     callbacks = []; // 成功执行函数
+//     state = 'pending' // 状态
+//     value = null; // 保存结果
+//     constructor(fn) {
+//         fn(this._resolve.bind(this));
+//     }
+//     then(onFulfilled) {
+//         if(this.state === 'pending') {
+//             // 在resolve之前
+//             this.callbacks.push(onFulfilled);
+//         } else {
+//             // 在resolve之后，直接执行回调，返回结果
+//             onFulfilled(this.value)
+//         }
+//         this.callbacks.push(onFulfilled);
+//         return this;
+//     }
+//     _resolve(value) {
+//        this.state = 'fulfilled'
+//        this.value = value
+//        this.callbacks.forEach((fn) => fn(value));
+//     }
+// }
+// let p = new MyPromise((resolve) => {
+//     // setTimeout(() => {
+//     //     console.log('done');
+//     //     resolve('5s');
+//     // });
+//     console.log('同步执行')
+//     console.log('tong bu zhi xing')
+// })
+// p.then((tip) => {
+//     console.log('tip1', tip);
+//     return '99'
+// }).then((val) => {
+//     console.log('tip2', val)
+// });
+
+
+// setTimeout(() => {
+//     p.then(tip => {
+//         console.log('then3', tip)
+//     })
+// })
+
+
+
+
+// promise1 = new Promise((resolve, reject) => {
+//     setTimeout(()=>{
+//         resolve('promise1_resolve_data');
+//     },1000)
+// })
+// console.log(promise1);
+// promise2 = promise1.then((data) => {
+//     console.log('promise2---', data);
+//     return 'promise2';
+// })
+// console.log(promise2);
+// promise3 = promise1.then((data) => {
+//     console.log('promise3---', data);
+//     return 'promise3';
+// })
+// console.log(promise3);
+// setTimeout(() => {
+//     console.log('--promise1--', promise1);
+//     console.log('--promise2--', promise2);
+//     console.log('--promise3--', promise3);
+// },3000)
+
+
+function Foo() {
+    getName = function () { console.log (1); };
+    return this;
 }
+Foo.getName = function () { console.log (2);};
+Foo.prototype.getName = function () { console.log (3);};
+var getName = function () { console.log (4);};
+function getName() { console.log (5);}
+
+//请写出以下输出结果：
+Foo.getName(); // 2
+getName(); // 4
+Foo().getName(); // 报错
+getName(); // 4
+new Foo.getName(); // 2
+new Foo().getName(); // 3
+new new Foo().getName(); // 3
