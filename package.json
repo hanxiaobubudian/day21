@@ -10,7 +10,7 @@
         "eslint-plugin-import": "^2.6.0",
         "eslint-plugin-react": "^7.1.0",
         "husky": "^0.14.2",
-        "babel-eslint": "^8.1.1",
+        "babel-eslint": "^10.1.0",
         "lint-staged": "^4.0.0",
         "prettier":"^1.16.4",
         "eslint-plugin-prettier":"^3.0.1",
