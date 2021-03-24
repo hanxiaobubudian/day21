@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个websocket实例, 客户端与服务器端建立连接
+        var ws = new WebSocket('wss://echo.websocket.org');
+        // 指定连接成功之后回调
+        // ws.addEventListener('open', function(e) {
+        //     ws.send('hello every')
+        // })
+        ws.onopen = function(e) {
+            ws.send('hello every')
+        }
+        ws.addEventListener('message', function(e) {
+            console.log('message from server', e.data)
+        })
+        ws.onclose = function(e) {
+            var code = e.code;
+            console.log('code===', code)
+            var reason = e.reason
+            console.log('reason===', reason)
+            var wasClean = e.wasClean;
+            console.log('wasClean===', wasClean)
+        }
+    </script>
+</body>
+</html>
