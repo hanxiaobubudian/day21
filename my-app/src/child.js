@@ -23,7 +23,12 @@ export default class Child extends Component {
     return (
       <Consumer>
         {val => {
-          return <p>{val.data}</p>;
+          return (
+            <React.Fragment>
+              <p>{val.data}</p>
+              <p>这是子组件内容</p>
+            </React.Fragment>
+          );
         }}
       </Consumer>
     );

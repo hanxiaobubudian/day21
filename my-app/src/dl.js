@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import Child from "./child";
 import { Provider } from "./context";
 
 class DL extends Component {
+  parent = createRef();
+  child = createRef();
   constructor(props) {
     super(props);
     console.log("1.dl----组件初始化");
     this.state = {};
+    this.parent = createRef();
+    this.child = createRef();
   }
   static getDerivedStateFromProps(props, state) {
     console.log("2.dl------", "将props映射到state中");
@@ -14,11 +18,19 @@ class DL extends Component {
       state: 1
     };
   }
-  UNSALF_componentWillMount() {
-    console.log("3.dl====组件即将挂载");
-  }
+  // UNSALF_componentWillMount() {
+  // 	console.log("3.dl====组件即将挂载");
+  // }
   componentDidMount() {
     console.log("5.dl====挂载完毕");
+    // console.log("真实的dom节点===", this.refs.parent);
+    // console.log("222===", this.refs.child);
+    console.log(this.parent);
+    console.log(this.child);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("dl=========shouldComponentUpdate");
+    return true;
   }
   render() {
     console.log("4.dl====render");
@@ -41,12 +53,15 @@ class DL extends Component {
             })}
         </dl>
         {/* {index === 2 && (
-					<Provider value={{ data: "11111" }}>
-						<Child />
-					</Provider>
-				)} */}
+          <Provider value={{ data: "11111" }}>
+            <Child />
+          </Provider>
+        )} */}
         <Provider value={{ data: "11111" }}>
-          <Child />
+          <div>
+            <p ref={this.parent}>father</p>
+            <Child ref={this.child} />
+          </div>
         </Provider>
       </React.Fragment>
     );
