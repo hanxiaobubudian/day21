@@ -1,2 +1,2 @@
-import css from './css/index.css'
-console.log('css====', css)
+import css from "./css/index.css";
+console.log("css====", css);
