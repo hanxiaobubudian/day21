@@ -10,15 +10,15 @@ dd {
 			padding: 10px;
 			background-color: #eee;
 			font-weight: bold;
-            cursor: pointer;
+			cursor: pointer;
 		}
-        dd {
-            padding: 10px;
-            display: none;
-            &.checked {
-                background-color: green;
-            }
-        }
+		dd {
+			padding: 10px;
+			display: none;
+			&.checked {
+				background-color: green;
+			}
+		}
 	}
 	.expanded dd {
 		display: block;

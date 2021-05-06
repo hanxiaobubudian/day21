@@ -5,16 +5,17 @@
     "main": "index_2.js",
     "dependencies": {},
     "devDependencies": {
+        "babel-eslint": "^10.1.0",
         "eslint": "^5.0.0",
         "eslint-config-ali": "^2.0.1",
+        "eslint-config-prettier": "^4.0.0",
         "eslint-plugin-import": "^2.6.0",
+        "eslint-plugin-prettier": "^3.0.1",
         "eslint-plugin-react": "^7.1.0",
         "husky": "^0.14.2",
-        "babel-eslint": "^10.1.0",
         "lint-staged": "^4.0.0",
-        "prettier":"^1.16.4",
-        "eslint-plugin-prettier":"^3.0.1",
-        "eslint-config-prettier":"^4.0.0"
+        "prettier": "^1.16.4",
+        "webpack-cli": "^4.6.0"
     },
     "scripts": {
         "precommit": "lint-staged"

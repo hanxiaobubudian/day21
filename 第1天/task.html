@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <script>
-      /*
+        /*
             第一天作业公布：
             🎁 编写一个方法，该方法接收两个参数，分别为 k 和 一个无序的纯数字数组。该方法在执行后，会返回数组中第 k 大的数字。特别注意，如果数组中，有两位数值一样的数字，同数值数字排名并列。如 [3,1,3,2,5,4,5] 中，第 1 大的数字为 5，第2大的数字为 4，第5大的数字为 1。
             🎁__proto__ 和 prototype 之前有什么关系？
@@ -18,142 +20,146 @@
             2、作业小程序打卡，可以搜索“金三银四碾压面试官”爬楼获取。
             */
 
-      /**
-            第1题：
-            🎁编写一个方法，该方法接收两个参数，分别为 k 和 一个无序的纯数字数组。该方法在执行后，会返回数组中第 k 大的数字。特别注意，如果数组中，有两位数值一样的数字，同数值数字排名并列。如 [3,1,3,2,5,4,5] 中，第 1 大的数字为 5，第2大的数字为 4，第5大的数字为 1。
-            分析：
-            k >= 0, && k <= arr.length;
-            数组从小到大排序，
-            数组去重
-            */
-      // k: 第k大
-      // arr：需要处理的数组
-      console.log("*********第1题开始***************");
-      function selectK(k, arr) {
-        if (k <= 0) return;
-        const sortArr = sort(arr);
-        const uniqueArr = unique(sortArr);
-        // 对超出数组长度处理
-        k = k >= uniqueArr.length ? uniqueArr.length : k;
-        const result = uniqueArr[k - 1];
-        return result;
-      }
-      // 对数组从大到小排序
-      function sort(arr) {
-        return arr.sort(function(a, b) {
-          return b - a;
-        });
-      }
-      // 对数组去重
-      function unique(arr) {
-        const unique = new Set();
-        return arr.filter(item => {
-          const id = item + JSON.stringify(item);
-          if (unique.has(id)) {
-            return false;
-          } else {
-            unique.add(id);
-            return true;
-          }
-        });
-      }
-      let a1 = [1, 2, 0, -1, 4, 5, 0, 9, 9, 8];
-      let k = 1;
-      // a1 = [3,1,3,2,5,4,5];
-      console.log(a1, "的第", k, "大结果是:");
-      console.log(selectK(k, a1));
+        /**
+              第1题：
+              🎁编写一个方法，该方法接收两个参数，分别为 k 和 一个无序的纯数字数组。该方法在执行后，会返回数组中第 k 大的数字。特别注意，如果数组中，有两位数值一样的数字，同数值数字排名并列。如 [3,1,3,2,5,4,5] 中，第 1 大的数字为 5，第2大的数字为 4，第5大的数字为 1。
+              分析：
+              k >= 0, && k <= arr.length;
+              数组从小到大排序，
+              数组去重
+              */
+        // k: 第k大
+        // arr：需要处理的数组
+        console.log("*********第1题开始***************");
 
-      // 简洁方法
-      function getNum(k, arr) {
-        let newArr = Array.from(
-          new Set(
-            arr.sort(function(a, b) {
-              return b - a;
-            })
-          )
-        );
-        if (k >= newArr.length) return;
-        return `第${k}大的数字是：${newArr[k - 1]}`;
-      }
-      console.log(getNum(1, [0, 9, 8, 9, 10, 1, 0]));
-      console.log("*********第1题结束***************");
+        function selectK(k, arr) {
+            if (k <= 0) return;
+            const sortArr = sort(arr);
+            const uniqueArr = unique(sortArr);
+            // 对超出数组长度处理
+            k = k >= uniqueArr.length ? uniqueArr.length : k;
+            const result = uniqueArr[k - 1];
+            return result;
+        }
+        // 对数组从大到小排序
+        function sort(arr) {
+            return arr.sort(function (a, b) {
+                return b - a;
+            });
+        }
+        // 对数组去重
+        function unique(arr) {
+            const unique = new Set();
+            return arr.filter(item => {
+                const id = item + JSON.stringify(item);
+                if (unique.has(id)) {
+                    return false;
+                } else {
+                    unique.add(id);
+                    return true;
+                }
+            });
+        }
+        let a1 = [1, 2, 0, -1, 4, 5, 0, 9, 9, 8];
+        let k = 1;
+        // a1 = [3,1,3,2,5,4,5];
+        console.log(a1, "的第", k, "大结果是:");
+        console.log(selectK(k, a1));
 
-      /*
-            第2题：
-            🎁__proto__ 和 prototype 之前有什么关系？
-            实例话对象的__proto__指向原型对象的prototype
-            */
+        // 简洁方法
+        function getNum(k, arr) {
+            let newArr = Array.from(
+                new Set(
+                    arr.sort(function (a, b) {
+                        return b - a;
+                    })
+                )
+            );
+            if (k >= newArr.length) return;
+            return `第${k}大的数字是：${newArr[k - 1]}`;
+        }
+        console.log(getNum(1, [0, 9, 8, 9, 10, 1, 0]));
+        console.log("*********第1题结束***************");
 
-      /*
-            第3题：
-            🎁 .call(), .apply() .bind() 的区别和作用？bind 方法如何来实现？
-            区别：
-              1）bind返回是一个新函数，必须要调用一下
-              2）传参方式不同, 它们的第一个参数都是指向的this, call 后面参数用逗号分割排列，apply后面参数使用数组形式，bind两种方式均可
-            作用：改变this指向
-            bind实现：bind方法会创建一个绑定函数，当调用绑定函数时，会以第一个参数作为this
-            */
-      Function.prototype.myBind = function(obj, ...args) {
-        const fn = this;
-        return function(...rest) {
-          fn.call(obj || window, ...args, ...rest);
+        /*
+              第2题：
+              🎁__proto__ 和 prototype 之前有什么关系？
+              实例话对象的__proto__指向原型对象的prototype
+              */
+
+        /*
+              第3题：
+              🎁 .call(), .apply() .bind() 的区别和作用？bind 方法如何来实现？
+              区别：
+                1）bind返回是一个新函数，必须要调用一下
+                2）传参方式不同, 它们的第一个参数都是指向的this, call 后面参数用逗号分割排列，apply后面参数使用数组形式，bind两种方式均可
+              作用：改变this指向
+              bind实现：bind方法会创建一个绑定函数，当调用绑定函数时，会以第一个参数作为this
+              */
+        Function.prototype.myBind = function (obj, ...args) {
+            const fn = this;
+            return function (...rest) {
+                fn.call(obj || window, ...args, ...rest);
+            };
         };
-      };
 
-      // 任意需要改变this指向的函数
-      const anyFn = function() {
-        console.log(
-          "***************这是需要改变this指向的函数内部**********start"
-        );
-        console.log("改变之后的this===", this);
-        console.log("函数的参数===", ...arguments);
-        console.log(
-          "***************这是需要改变this指向的函数内部**********end"
-        );
-      };
-      anyFn.myBind({}, 1)();
-      // 需要指向的对象
-      const obj = {
-        a: "aaa",
-        b: "bbb"
-      };
+        // 任意需要改变this指向的函数
+        const anyFn = function () {
+            console.log(
+                "***************这是需要改变this指向的函数内部**********start"
+            );
+            console.log("改变之后的this===", this);
+            console.log("函数的参数===", ...arguments);
+            console.log(
+                "***************这是需要改变this指向的函数内部**********end"
+            );
+        };
+        anyFn.myBind({}, 1)();
+        // 需要指向的对象
+        const obj = {
+            a: "aaa",
+            b: "bbb"
+        };
 
-      /**
-       * @Date: 2021-03-18 10:55:50
-       * @description: 手动实现的call
-       * @param {改变this所指向的那个对象} obj
-       * @return {改变this之后并且自执行的函数}
-       */
-      // Function.prototype.myCall = function(obj) {
-      //     // 改变this所指向的那个对象 兼容
-      //     obj = obj || window;
-      //     //  定义调用函数，并且指向obj
-      //     obj.copyAnyFn = this;
-      //     // anyFn传入的参数
-      //     const args = [...arguments].slice(1);
-      //     const res = args.length
-      //         ? obj.copyAnyFn(...args)
-      //         : obj.copyAnyFn();
-      //     //  删除copyAnyFn，保持obj是传入时状态
-      //     delete obj.copyAnyFn;
-      //     return res;
-      // };
-      // //  测试-myCall
-      // anyFn.myCall(obj, 1, 2, 3);
-      // anyFn.myCall(obj);
+        /**
+         * @Date: 2021-03-18 10:55:50
+         * @description: 手动实现的call
+         * @param {改变this所指向的那个对象} obj
+         * @return {改变this之后并且自执行的函数}
+         */
+        // Function.prototype.myCall = function(obj) {
+        //     // 改变this所指向的那个对象 兼容
+        //     obj = obj || window;
+        //     //  定义调用函数，并且指向obj
+        //     obj.copyAnyFn = this;
+        //     // anyFn传入的参数
+        //     const args = [...arguments].slice(1);
+        //     const res = args.length
+        //         ? obj.copyAnyFn(...args)
+        //         : obj.copyAnyFn();
+        //     //  删除copyAnyFn，保持obj是传入时状态
+        //     delete obj.copyAnyFn;
+        //     return res;
+        // };
+        // //  测试-myCall
+        // anyFn.myCall(obj, 1, 2, 3);
+        // anyFn.myCall(obj);
 
-      Function.prototype.myApply = function(obj) {
-        obj = obj || window;
-        obj.copyAnyFn = this;
-        const res = arguments[1]
-          ? obj.copyAnyFn(arguments[1])
-          : obj.copyAnyFn();
-        delete obj.copyAnyFn;
-        return res;
-      };
-      //  测试-myApply
-      anyFn.myApply(obj, [1, 2, 3]);
-      anyFn.myApply(obj);
+        Function.prototype.myApply = function (obj) {
+            obj = obj || window;
+            obj.copyAnyFn = this;
+            const res = arguments[1] ?
+                obj.copyAnyFn(arguments[1]) :
+                obj.copyAnyFn();
+            delete obj.copyAnyFn;
+            return res;
+        };
+        //  测试-myApply
+        anyFn.myApply(obj, [1, 2, 3]);
+        anyFn.myApply(obj)
+
+        
     </script>
-  </body>
+</body>
+
 </html>
