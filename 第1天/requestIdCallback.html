@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function sleep(delay) {
+            for (var ts = Date.now(); Date.now() - ts <= delay;) {
+                // console.log('*******')
+            }
+        }
+        // 任务内容
+        const works = [
+            () => {
+                console.log('任务1 start');
+                sleep(20)
+                console.log('任务1  end');
+            },
+            () => {
+                console.log('任务2 start');
+                sleep(2)
+                console.log('任务2  end');
+            },
+            () => {
+                console.log('任务3 start');
+                sleep(3)
+                console.log('任务3  end');
+            },
+            () => {
+                console.log('任务4 start');
+                sleep(4)
+                console.log('任务4  end');
+            },
+            () => {
+                console.log('任务5 start');
+                sleep(1)
+                console.log('任务5  end');
+            },
+            () => {
+                console.log('任务6 start');
+                sleep(1)
+                console.log('任务6  end');
+            },
+        ]
+
+        // 利用浏览器空闲时间执行任务
+        requestIdleCallback(workLoop);
+        // 执行任务
+        function workLoop(deadline) {
+            console.log(`本帧的剩余时间是${deadline.timeRemaining()}`)
+            while(deadline.timeRemaining() > 1 && works.length > 0 ) {
+                // 剩余时间 > 1毫秒，并且还有任务没有执行完
+                // 执行单元
+                performUnitOfWork()
+            }
+            //  还有任务未完成
+            if(works.length > 0) {
+                requestIdleCallback(workLoop);
+            }
+        }
+        // 执行任务单元
+        function performUnitOfWork() {
+            let work = works.shift(); // 取出第一个元素
+            work()
+        }
+    </script>
+</body>
+
+</html>

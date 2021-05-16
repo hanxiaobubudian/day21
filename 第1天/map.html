@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const arr = [
+        //     ['a', 1],
+        //     ['b', 2],
+        //     ['3', 3]
+        // ]
+        // const map = new Map()
+        // const p = {
+        //     p: 'hello'
+        // };
+        // map.set(p, 'hahah');
+        // arr.forEach(([key, value]) => {
+        //     console.log('key===', key, '****value===', value)
+        //     map.set(key, value)
+        // })
+        // console.log(map)
+        function myMap() {
+            // 初始化数据
+            // this.element = []
+            // this.size = this.element.length;
+
+            // this.set = function (key, value) {
+            //     this.element.push({
+            //         [key]: value
+            //     })
+            //     return this.element
+            // }
+
+            // this.get = function (key) {
+
+            // }
+
+            // this.has = function (key) {
+
+            // }
+
+            // this.delete = function (key) {
+
+            // }
+
+            // this.clear = function () {
+            //     this.element = [];
+            // }
+
+
+            //这里定义数据结构
+            var struct = function (key, value) {
+                this.key = key;
+                this.value = value;
+            }
+
+            //这是添加的方法
+
+            var put = function (key, value) {
+                for (var i = 0; i < this.arr.length; i++) {
+                    if (this.arr[i].key === key) {
+                        this.arr[i].value = value;
+                        return;
+                    }
+                }
+                this.arr[this.arr.length] = new struct(key, value);
+            }
+
+        }
+
+        const mmp = new myMap();
+        // mmp.put('1', 11);
+        console.log(mmp)
+    </script>
+</body>
+
+</html>
