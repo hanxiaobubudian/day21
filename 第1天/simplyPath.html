@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var simplifyPath = function (path) {
+            const stack = [];
+            const obj = {
+                '': (stack) => stack,
+                '.': (stack) => stack,
+                '..': (stack) => {
+                    stack.pop();
+                    return stack;
+                },
+            };
+            let paths = path.split('/');
+            for (let i = 0; i < paths.length; i++) {
+                const p = paths[i];
+                if (p in obj) {
+                    obj[p](stack);
+                } else {
+                    stack.push(p)
+                }
+            }
+            return `/${stack.join('/')}`;
+        };
+        console.log(simplifyPath('/home//j'))
+    </script>
+</body>
+
+</html>
